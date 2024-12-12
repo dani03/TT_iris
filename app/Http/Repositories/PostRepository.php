@@ -20,11 +20,7 @@ class PostRepository
      */
     public function AddPost(array $data)
     {
-        return Post::create([
-            'text' => $data['text'],
-            'title' => $data['title'],
-
-        ]);
+        return Post::create($data);
     }
 
     /**

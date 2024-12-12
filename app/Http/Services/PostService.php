@@ -17,7 +17,7 @@ class PostService
 
     public function addingPost(PostRequest $request)
     {
-        $data = ['text' => $request->text, 'title' => $request->title];
+        $data = ['text' => $request->text, 'title' => $request->title, 'user_id' => $request->user()->id];
 
         return $this->postRepository->AddPost($data);
     }

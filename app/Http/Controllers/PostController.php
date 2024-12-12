@@ -39,4 +39,10 @@ class PostController extends Controller
 
         return view('posts.show', ['post' => $post]);
     }
+
+    public function likes(Post $post, Request $request)
+    {
+        $post->likes()->toggle($request->user()->id);
+        return redirect()->back();
+    }
 }

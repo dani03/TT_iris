@@ -81,7 +81,9 @@ tous vos containers doivent être au vert si vous avez docker desktop.
     `docker compose run --rm artisan config:clear`
     `docker compose run --rm artisan optimze`
 
-pour nettoyer le cache et les configurations supprimées
+pour nettoyer le cache et les configurations supprimées.
+
+lancer la commande `npm install` dans le terminal de votre projet pour installer les dependances front end
  lancer la commande `npm run dev` afin build et run les assets du projet.
 
 8. Pour stopper les containers taper la commande `docker compose down` vos données ne seront pas perdues.
@@ -157,6 +159,9 @@ php artisan cache:clear
 php artisan config:clear
 php artisan optimize
 ```
+
+lancer la commande `npm install` dans le terminal de votre projet pour installer les dependances front end
+lancer la commande `npm run dev` afin build et run les assets du projet.
 
 Cette documentation vous guide à travers l'installation et la configuration du projet.
 

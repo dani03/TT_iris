@@ -18,10 +18,10 @@ Pour installer le projet via Docker, suivez ces étapes :
     ```bash
     git clone https://github.com/dani03/TT_iris.git
     ```
+    NB: si un dossier `mysql` existe à la racine de votre projet veuillez le supprimer avant de continuer.
 
 2. Accédez au répertoire du projet, puis exécutez la commande suivante pour construire et démarrer les services :
 
-    NB: si un dossier `mysql` existe à la racine de votre projet veuillez le supprimer.
 
     ```bash
     make build-start

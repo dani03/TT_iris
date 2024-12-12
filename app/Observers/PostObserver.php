@@ -14,7 +14,8 @@ class PostObserver
     public function created(Post $post): void
     {
         // on envoie un mail lorsque le post est crée
-        Mail::to(auth()->user()->email, $post)->send(new PostCreatedMail(['title' => $post->title]));
+        //lorsqu'on lance les seeders un mail envoyer et pour eviter ça on met un mail fictif
+        Mail::to(auth()->user()->email ?? "email@fictif.fr", $post)->send(new PostCreatedMail(['title' => $post->title]));
 
     }
 

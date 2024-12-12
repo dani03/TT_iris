@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LikeEvent;
+use App\Http\Repositories\UserRepository;
 use App\Http\Requests\PostRequest;
 use App\Http\Services\PostService;
+use App\Http\Services\UserService;
 use App\Models\Post;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -42,7 +45,21 @@ class PostController extends Controller
 
     public function likes(Post $post, Request $request)
     {
-        $post->likes()->toggle($request->user()->id);
+        //recupération du user
+        $userId = $request->user()->id;
+        $user = (new UserService(new UserRepository()))->getUser($userId);
+        if (!$user) {
+            return redirect()->back()->with('error', 'utilisateur non trouvé');
+        }
+
+        $result = $post->likes()->toggle($userId);
+
+        // on vérifie si on a liké ou unliked
+        $action = empty($result['attached']) ? 'unliked' : 'liked';
+        if ($action === 'liked') {
+           
+            event(new LikeEvent($post, $user));
+        }
         return redirect()->back();
     }
 }

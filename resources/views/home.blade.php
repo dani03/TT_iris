@@ -2,7 +2,7 @@
 
 @section('main')
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success bg-green-400">
             {{ session('success') }}
         </div>
     @endif
@@ -34,7 +34,7 @@
 
         </a>
 
-      
+
 
     </div>
 @endsection

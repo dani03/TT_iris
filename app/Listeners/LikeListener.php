@@ -23,7 +23,7 @@ class LikeListener
      */
     public function handle(LikeEvent $event)
     {
-
+        
         Mail::to($event->post->user->email)->send(new LikePostMail($event->post->title));
 
     }

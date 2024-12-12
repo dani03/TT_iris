@@ -11,6 +11,7 @@ use App\Models\Post;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -26,7 +27,12 @@ class PostController extends Controller
         return view('posts.index', ['posts' => $this->postService->getAllPosts()]);
     }
 
-    public function store(PostRequest $request)
+    /**
+     * ajouter un post / article
+     * @param PostRequest $request
+     * @return RedirectResponse
+     */
+    public function store(PostRequest $request): RedirectResponse
     {
         if ($this->postService->addingPost($request)) {
             session()->flash('success', 'Article ajouté avec succès...');
@@ -37,13 +43,22 @@ class PostController extends Controller
         return redirect()->route('home');
     }
 
-    public function show(Post $post)
+    /**
+     * @param Post $post
+     * @return View
+     */
+    public function show(Post $post): View
     {
 
         return view('posts.show', ['post' => $post]);
     }
 
-    public function likes(Post $post, Request $request)
+    /**
+     * @param Post $post
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function likes(Post $post, Request $request): RedirectResponse
     {
         //recupération du user
         $userId = $request->user()->id;
@@ -57,7 +72,7 @@ class PostController extends Controller
         // on vérifie si on a liké ou unliked
         $action = empty($result['attached']) ? 'unliked' : 'liked';
         if ($action === 'liked') {
-           
+
             event(new LikeEvent($post, $user));
         }
         return redirect()->back();

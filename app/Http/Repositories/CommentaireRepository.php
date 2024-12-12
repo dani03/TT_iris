@@ -9,7 +9,7 @@ class CommentaireRepository
 
     /**
      * ajout d'un commentaire à un article/post
-     * @param array $data
+     * @param array{comment: string, post_id: int} $data The data required to create a commentaire.
      * @return Commentaire
      */
     public function addCommentaire(array $data): Commentaire

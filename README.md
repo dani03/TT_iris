@@ -1,85 +1,162 @@
-<p align="center"><a href="https://iris-prevention.fr" target="_blank"><img src="public/img.png" width="200" alt="Iris Logo"></a></p>
+# Installation et configuration de l'API
 
-# Test technique Iris Prévention - Laravel
+Bienvenue dans la documentation de cette API REST. Suivez les instructions ci-dessous pour installer et démarrer le projet.
 
-Ce test technique a pour but d'évaluer vos competences sur php et laravel.
-Votre capacité à respecter les consignes, à structurer votre code et à gérer vos branches et commits sera aussi évaluée.
+## Installation
 
-## Sujet 1 : Mini-système de blog
+Vous avez deux options pour installer ce projet :
 
-### Objectif : Évaluer la capacité à mettre en œuvre un CRUD basique.
-- Créer un modèle Post et un modèle Commentaire.
-- Valider les inputs avec des formrequests.
-- Implémenter une interface :
-  - Pour créer et gérer des articles.
-  - Pour ajouter des commentaires aux articles.
-  - Pour voir les commentaires associés à un article.
+1. **Installation avec Docker**
+2. **Installation classique**
 
-#### Bonus : Permettre aux utilisateurs d’aimer un article.
+### 1. Installation avec Docker
 
-## Sujet 2 : Système d’authentification personnalisé
+Pour installer le projet via Docker, suivez ces étapes :
 
-### Objectif : Tester les compétences en authentification et gestion des sessions.
-- Créer un système de connexion/inscription (pas via artisan make:auth).
-- Mettre en place :
-- Un système de réinitialisation de mot de passe (par email).
-- Une protection des routes nécessitant une authentification.
-- Obliger les utilisateurs à être connectés pour pouvoir liker et poster des commentaires et des articles.
+1. Clonez ou téléchargez le dépôt GitHub avec la commande suivante :
 
-#### Bonus : 
-- #### Implémenter une double authentification (par exemple, un code envoyé par email).
-- #### Implémenter un système de rôle, les administrateurs peuvent modérer et modifier les articles des autres utilisateurs.
+    ```bash
+    git clone https://github.com/dani03/TT_iris.git
+    ```
 
-## Sujet 3 : API REST : Gestion des utilisateurs et des articles
+2. Accédez au répertoire du projet, puis exécutez la commande suivante pour construire et démarrer les services :
 
-### Objectif : Tester la maîtrise des API et des bonnes pratiques REST.
-- Créer une API permettant de gérer des utilisateurs/Articles :
-- Créer un utilisateur/Article.
-- Récupérer la liste des utilisateurs/Articles.
-- Récupérer un utilisateur/article spécifique.
-- Mettre à jour un utilisateur/article.
-- Supprimer un utilisateur/article.
-- Utiliser des Resource pour structurer les réponses.
+    NB: si un dossier `mysql` existe à la racine de votre projet veuillez le supprimer.
 
-#### Bonus :
-- #### Ajouter une authentification (par exemple, via Passport ou Sanctum).
-- #### Implémenter une pagination pour l’API (avec les liens next, prev).
+    ```bash
+    make build-start
+    ```
 
-## Sujet Bonus 1 : Événements et Observateurs
+    Cette commande effectuera les actions suivantes :
 
-### Objectif : Tester la maîtrise des fonctionnalités avancées de Laravel.
-- Créer un événement lors de la création d'un article/commentaire et envoyer un email à l'administrateur.
-- Créer un événement lors de la suppression d’un article/commentaire et envoyer un email à l’administrateur.
-- Créer un événement lorsqu’un utilisateur aime un article et envoyer un email à l’auteur de l’article.
-- Mettre en place une écoute pour envoyer un email adéquat à l’utilisateur quand un événement est déclenché.
+    - Recrée le serveur Nginx.
+    - créer un fichier database.sqlite dans le dossier `database`
+    - Installe les dépendances via Composer.
+    - Crée un fichier `.env` basé sur le fichier `.env.exemple` et remplit les variables liées à la base de données (déclarées dans le fichier `docker-compose.yml` sous le service MySQL).
+    - Génère la clé d'application avec `php artisan key:generate`.
+    - créer un dossier `mysql` à la racine qui sera votre base de données.
+    - Exécute les migrations et les seeders pour initialiser la base de données.
 
-## Sujet Bonus 2 : Tests automatisés
+3. Une fois l'installation terminée, vous pouvez vérifier que le blog fonctionne en accédant à l'URL suivante :
 
-### Objectif : Évaluer les compétences en TDD ou les tests unitaires.
-- Créer des tests unitaires pour valider la logique d’une API REST.
-- Les tests unitaires doivent de préférence être écrits avec Pest.
-- Proposer un test fonctionnel avec Laravel Dusk (ou autre framework de test type cypress) pour valider l’interface utilisateur du blog.
+    ```
+    http://localhost:4000
+    ```
 
-## Rendu
-- Vous devrez fournir un lien vers un dépôt git (GitHub, GitLab, Bitbucket) contenant votre code.
-- Vous devrez fournir un fichier README.md expliquant comment installer et utiliser votre application.
-- Vous devrez fournir un fichier .env.example pour permettre de configurer l’application.
-- Vous devrez fournir des migrations pour la base de données.
-- Vous devrez fournir des seeds pour remplir la base de données avec des données de test.
-- Votre code doit être exempt de bugs et de vulnérabilités.
-- Les bonus ne sont pas obligatoires, mais ils seront appréciés.
-- L'utilisation de Docker est un plus.
+4. Pour exécuter manuellement les migrations à l'intérieur du conteneur Docker, utilisez la commande suivante :
+    ```bash
+    docker compose run --rm artisan migrate
+    ```
+5. Pour exécuter dépendences à l'intérieur du conteneur Docker, utilisez la commande suivante :
 
-## Recommandations
-- Le répo actuel contient un projet Laravel de base. Vous pouvez le cloner pour commencer le test.
-- Vous pouvez utiliser des packages tiers pour faciliter la réalisation du test.
-- Vous pouvez utiliser des librairies front-end (Bootstrap, Tailwind, Vue.js, React, etc.) pour améliorer l’interface utilisateur.
-- Vous pouvez utiliser des outils de validation de code (Laravel Pint) pour améliorer la qualité de votre code.
-- Il est recommandé d'utiliser larastan (phpstan) pour vérifier la qualité de votre code.
-- Les commandes stan, pint, et pest sont disponibles dans le projet (composer scripts) pour vous aider à vérifier la qualité de votre code.
-- Gérez correctement les erreurs et les exceptions.
-- Respectez les conventions de nommage de Laravel.
-- Bien organiser vos branches et vos commits.
-- N’hésitez pas à ajouter des fonctionnalités supplémentaires si vous le souhaitez.
-- N’hésitez pas à poser des questions si vous avez des doutes sur les consignes.
-- Bon courage !
+    ```bash
+    docker compose run --rm composer install
+    ```
+
+6. Accès à phpmyadmin sur le port 2023 : http://localhost:2023
+
+7. si la commande `make` ne fonctionne pas utiliser ces commandes à la suite :
+
+```bash
+docker compose up --build -d nginx
+touch ./database/database.sqlite
+docker compose run --rm composer install
+
+créer un fichier .env file à la racine du projet comme indiqué dans la partie de l\'installation classique
+et ajouter y le les variable correspondantes et leurs valeurs
+
+docker compose run --rm artisan key:generate
+docker compose run --rm artisan migrate
+docker compose run --rm artisan db:seed
+
+
+
+```
+
+tous vos containers doivent être au vert si vous avez docker desktop.
+
+    Si vous rencontrez des problèmes
+    effectuer les commandes suivantes :
+    `docker compose run --rm artisan cache:clear`
+    `docker compose run --rm artisan config:clear`
+    `docker compose run --rm artisan optimze`
+
+pour nettoyer le cache et les configurations supprimées
+
+8. Pour stopper les containers taper la commande `docker compose down` vos données ne seront pas perdues.
+
+### 2. Installation classique
+
+Pour une installation sans Docker, suivez ces étapes :
+
+1.  Clonez ou téléchargez le dépôt GitHub avec la commande suivante :
+
+    ```bash
+    git clone https://github.com/dani03/api_iris.git
+    ```
+
+2.  Accédez au répertoire du projet et créez un fichier `.env` à la racine. Copiez-collez le contenu du fichier `.env.exemple` dans le nouveau fichier `.env`. Remplacez ensuite les informations de connexion à la base de données avec vos propres identifiants :
+
+    ```plaintext
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=laravel_blog
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
+
+3.  Dans le dossier database situé à la racine du projet créer un fichier database.sqlite
+
+4.  lancer l'installation des dépendances avec la commande `composer install`
+
+5.  Générez la clé d'application avec la commande suivante :
+
+    ```bash
+    php artisan key:generate
+    ```
+
+6.  dans votre SGBD (phpmyadmin, mysql workbench etc...) créer une base de données `laravel_blog`
+    ce nom doit correspondre à la valeur de `DB_DATABASE` situé dans le fichier `.env`
+7.  Lancez les migrations pour créer les tables dans la base de données :
+
+    ```bash
+    php artisan migrate
+    ```
+
+8.  Si vous souhaitez remplir la base de données avec des données initiales, exécutez les seeders :
+
+    ```bash
+    php artisan db:seed
+    ```
+
+9.  Pour démarrer le serveur localement, exécutez la commande suivante :
+
+    ```bash
+    php artisan serve --port 4000
+    ```
+
+10. Une fois les migrations et les seeders terminés, vous pouvez vérifier l'accès au blog en accédant à l'URL suivante :
+
+    ```
+    http://localhost:4000
+    ```
+
+11. Votre projet sera accessible à l'adresse suivante :
+
+        ```
+        http://localhost:4000
+        ```
+
+Si vous rencontrez des problèmes
+effectuer les commandes suivantes :
+
+```
+php artisan cache:clear
+php artisan config:clear
+php artisan optimize
+```
+
+Cette documentation vous guide à travers l'installation et la configuration du projet.
+
+# NB: tous les envoi de mail peuvent être vu dans le ficher `laravel.log` situé dans le dossier `storage/logs/laravel.log` si vous utilisez docker, la cofiguration d'une boite mail comme mailtrap est aussi possible.

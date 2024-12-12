@@ -1,6 +1,6 @@
-# Installation et configuration de l'API
+# Installation et configuration du projet
 
-Bienvenue dans la documentation de cette API REST. Suivez les instructions ci-dessous pour installer et démarrer le projet.
+Bienvenue dans la documentation d'installation. Suivez les instructions ci-dessous pour installer et démarrer le projet.
 
 ## Installation
 
@@ -18,7 +18,7 @@ Pour installer le projet via Docker, suivez ces étapes :
     ```bash
     git clone https://github.com/dani03/TT_iris.git
     ```
-    NB: si un dossier `mysql` existe à la racine de votre projet veuillez le supprimer avant de continuer.
+    ## NB: si un dossier `mysql` existe à la racine du votre projet veuillez le supprimer avant de continuer.
 
 2. Accédez au répertoire du projet, puis exécutez la commande suivante pour construire et démarrer les services :
 

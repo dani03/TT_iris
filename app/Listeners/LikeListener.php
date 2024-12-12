@@ -18,12 +18,14 @@ class LikeListener
         //
     }
 
+
     /**
-     * Handle the event.
+     * @param LikeEvent $event
+     * @return void
      */
-    public function handle(LikeEvent $event)
+    public function handle(LikeEvent $event):void
     {
-        
+
         Mail::to($event->post->user->email)->send(new LikePostMail($event->post->title));
 
     }

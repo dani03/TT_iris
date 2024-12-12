@@ -82,6 +82,7 @@ tous vos containers doivent être au vert si vous avez docker desktop.
     `docker compose run --rm artisan optimze`
 
 pour nettoyer le cache et les configurations supprimées
+ lancer la commande `npm run dev` afin build et run les assets du projet.
 
 8. Pour stopper les containers taper la commande `docker compose down` vos données ne seront pas perdues.
 

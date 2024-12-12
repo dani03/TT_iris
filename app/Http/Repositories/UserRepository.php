@@ -19,14 +19,22 @@ class UserRepository
         return User::find($id);
     }
 
-    public function users()
+    /**
+     * @return mixed
+     */
+    public function users():Mixed
     {
         return User::paginate(15);
     }
 
+    /**
+     * @param User $user
+     * @param array{name: string, email: string} $data The data required to create a commentaire.
+     * @return bool
+     */
     public function updateUser(User $user, array $data): bool
     {
-        return $user->update($data);
+        return (bool) $user->update($data);
     }
 
 }

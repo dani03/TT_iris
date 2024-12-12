@@ -4,25 +4,37 @@ namespace App\Http\Services;
 
 use App\Http\Repositories\PostRepository;
 use App\Http\Requests\PostRequest;
+use App\Models\Post;
 use Illuminate\Support\Collection;
 
 class PostService
 {
     public function __construct(private PostRepository $postRepository) {}
 
-    public function getAllPosts(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    /**
+     * @return mixed
+     */
+    public function getAllPosts(): mixed
     {
         return $this->postRepository->getPosts();
     }
 
-    public function addingPost(PostRequest $request)
+    /**
+     * @param PostRequest $request
+     * @return Post
+     */
+    public function addingPost(PostRequest $request): Post
     {
-        $data = ['text' => $request->text, 'title' => $request->title, 'user_id' => $request->user()->id];
+        $data = ['text' => $request->text, 'title' => $request->title, 'user_id' => (int) $request->user()->id];
 
         return $this->postRepository->AddPost($data);
     }
 
-    public function getPost(int $postId)
+    /**
+     * @param int $postId
+     * @return Post|null
+     */
+    public function getPost(int $postId): Post | null
     {
 
         // récupération du post

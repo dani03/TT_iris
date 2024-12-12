@@ -6,6 +6,7 @@ use App\Http\Repositories\PostRepository;
 use App\Http\Requests\CommentaireRequest;
 use App\Http\Services\CommentaireService;
 use App\Http\Services\PostService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CommentaireController extends Controller
@@ -14,7 +15,11 @@ class CommentaireController extends Controller
     {
     }
 
-    public function store(CommentaireRequest $request)
+    /**
+     * @param CommentaireRequest $request
+     * @return RedirectResponse
+     */
+    public function store(CommentaireRequest $request): RedirectResponse
     {
         $this->commentaireService->createComment($request);
         //recupération du post/article

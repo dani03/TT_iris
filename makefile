@@ -14,7 +14,10 @@ migrations:
 migrations-seed:
 	@$(DOCKER_COMPOSE) run --rm artisan migrate
 	@$(DOCKER_COMPOSE) run --rm artisan db:seed
-
+# run npm
+npm-command:
+	npm install
+	npm run build
 
 # pour lancer le projet des le début avec toutes les commande dans l'ordre
 build-start:
@@ -25,6 +28,7 @@ build-start:
 	@echo "génération de la clé d'application... "
 	@$(DOCKER_COMPOSE) run --rm artisan key:generate
 	@make migrations-seed
+	@make npm-command
 	@echo "Felicitations tu viens de lancer le blog avec docker... "
 
 #refraichi la base de donnée et en met a jour

@@ -13,7 +13,8 @@ class Commentaire extends Model
 
     protected $fillable = [
         'comment',
-        'post_id'
+        'post_id',
+        'user_id'
     ];
 
 
@@ -21,5 +22,9 @@ class Commentaire extends Model
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);
+    }
+
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
     }
 }

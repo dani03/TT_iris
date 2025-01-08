@@ -19,7 +19,13 @@ class CommentaireService
   public function createComment(CommentaireRequest $request): Mixed
   {
 
-    $data = ['comment' => (string) $request->input('comment'), 'post_id' => (int) $request->input('post_id')];
+   
+    $data = [
+      'comment' => (string) $request->input('comment'),
+      'post_id' => (int) $request->input('post_id'),
+      'user_id' => auth()->user()->id,
+
+    ];
     return  $this->commentaireRepository->addCommentaire($data);
   }
 }

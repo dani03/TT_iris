@@ -36,7 +36,9 @@
                     <div class="p-4 bg-gray-100 border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600">
                         {{-- <p class="font-semibold text-gray-900 dark:text-white">Commentaire de John Doe</p> --}}
                         <p class="text-gray-600 dark:text-gray-400 text-capitalize">
-                            {{ $commentaire->comment }}</p>
+                            <span class="text-xl">{{ $commentaire->user->name }}: </span>
+                            {{ $commentaire->comment }}
+                        </p>
                     </div>
                 @endforeach
             </div>

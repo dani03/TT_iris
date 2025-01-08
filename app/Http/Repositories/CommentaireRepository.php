@@ -14,10 +14,7 @@ class CommentaireRepository
      */
     public function addCommentaire(array $data): Commentaire
     {
-        return Commentaire::create([
-            'comment' => $data['comment'],
-            'post_id' => $data['post_id']
-        ]);
+        return Commentaire::create($data);
     }
 
     /**
